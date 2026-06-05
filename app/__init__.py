@@ -63,23 +63,26 @@ def create_app(config_object="config.Config"):
         "specs_route": "/docs",
     }
     swagger_template = {
-        "swagger": "2.0",
+        "openapi": "3.0.0",
         "info": {
             "title": "Expense Tracker API",
             "description": "A secure REST API for personal expense tracking with JWT authentication.",
             "version": "1.0.0",
             "contact": {"email": "dev@example.com"},
         },
-        "securityDefinitions": {
-            "BearerAuth": {
-                "type": "apiKey",
-                "name": "Authorization",
-                "in": "header",
-                "description": "Enter: **Bearer &lt;your_token&gt;**",
+        "components": {
+            "securitySchemes": {
+                "BearerAuth": {
+                    "type": "apiKey",
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "Enter: **Bearer &lt;your_token&gt;**",
+                }
             }
         },
-        "basePath": "/",
-        "schemes": ["http", "https"],
+        "servers": [
+            {"url": "/"}
+        ],
     }
     Swagger(app, config=swagger_config, template=swagger_template)
 
