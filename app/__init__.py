@@ -16,6 +16,10 @@ limiter = Limiter(key_func=get_remote_address)
 def create_app(config_object="config.Config"):
     app = Flask(__name__)
     app.config.from_object(config_object)
+    app.config['SWAGGER'] = {
+        'openapi': '3.0.0',
+        'specs_route': '/docs'
+    }
 
     # Logging
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
